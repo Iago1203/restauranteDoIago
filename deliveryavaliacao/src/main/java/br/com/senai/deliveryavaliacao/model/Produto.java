@@ -9,8 +9,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+
+
 
 @Entity
 @Table(name = "produto")
@@ -20,17 +21,16 @@ public class Produto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotNull 
-    @NotBlank (message = "Informe o nome do produto")
+   
     private String nome;
 
-    @NotNull 
-    @NotBlank (message = "O peço deve ser maior que zero")
+    
+    
     private BigDecimal preco;
 
     @ManyToOne
     @JoinColumn(name = "restaurante_id", nullable = false)
-    @NotBlank (message = "Informe o restaurante")
+    @NotNull (message = "Informe o restaurante")
     private Restaurante restaurante;
 
     public Produto() {

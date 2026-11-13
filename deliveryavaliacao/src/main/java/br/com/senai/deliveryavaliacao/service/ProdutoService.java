@@ -23,14 +23,14 @@ public class ProdutoService {
     }
 
     public Optional<Produto> cadastrar(ProdutoRequest produtoRequest) {
-        Optional<Restaurante> restauranteEncontrado = restauranteRepository.findById(produtoRequest.getRestauranteId());
-        if (restauranteEncontrado.isEmpty()) {
+        Optional<Restaurante> restauranteId = restauranteRepository.findById(produtoRequest.getRestauranteId());
+        if (restauranteId.isEmpty()) {
             return Optional.empty();
         }
         Produto produto = new Produto();
         produto.setNome(produtoRequest.getNome());
         produto.setPreco(produtoRequest.getPreco());
-        produto.setRestauranteId(restauranteEncontrado.get());
+        produto.setRestauranteId(restauranteId.get());
         return Optional.of(produtoRepository.save(produto));
     }
     public List<Produto> listar() {

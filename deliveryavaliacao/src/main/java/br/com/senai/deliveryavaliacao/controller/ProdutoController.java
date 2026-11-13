@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,12 +34,9 @@ public class ProdutoController {
     @PostMapping 
     public ResponseEntity<Produto> cadastrar(@Valid @RequestBody ProdutoRequest produtoRequest) {
         Optional<Produto> produtoCadastrado = produtoService.cadastrar(produtoRequest);
+        
+          return ResponseEntity.status(HttpStatus.CREATED).body(produtoCadastrado.get());
 
-        if (produtoCadastrado.isPresent()) {
-            return ResponseEntity.status(HttpStatus.CREATED).body(produtoCadastrado.get());
-        } else {
-            return ResponseEntity.badRequest().build();
-        }
     }
 
     @GetMapping 
